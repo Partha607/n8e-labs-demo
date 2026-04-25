@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mb-8 hud-panel p-8">
+      <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary">Contact</p>
+      <h1 class="mt-3 text-4xl md:text-5xl">Initialize Comms</h1>
+      <p class="mt-4 max-w-2xl text-base text-muted">
+        Ready to modernize your operations? Open a direct channel with N8E Labs.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+      <!-- Contact Form -->
+      <div class="hud-panel p-8 md:p-10">
+        <h2 class="text-2xl">Send Transmission</h2>
+        <form class="space-y-6">
+          <div>
+            <label for="name" class="mb-2 block font-orbitron text-sm uppercase tracking-wider text-muted">Ident (Name)</label>
+            <input type="text" id="name" name="name" class="interactive w-full border bg-transparent px-4 py-3 text-sm outline-none transition-colors focus:border-primary" style="border-color: var(--border);" placeholder="John Doe">
+          </div>
+          <div>
+            <label for="email" class="mb-2 block font-orbitron text-sm uppercase tracking-wider text-muted">Comms Channel (Email)</label>
+            <input type="email" id="email" name="email" class="interactive w-full border bg-transparent px-4 py-3 text-sm outline-none transition-colors focus:border-primary" style="border-color: var(--border);" placeholder="john@example.com">
+          </div>
+          <div>
+            <label for="message" class="mb-2 block font-orbitron text-sm uppercase tracking-wider text-muted">Data Payload (Message)</label>
+            <textarea id="message" name="message" rows="5" class="interactive w-full border bg-transparent px-4 py-3 text-sm outline-none transition-colors focus:border-primary" style="border-color: var(--border);" placeholder="Describe your operational needs..."></textarea>
+          </div>
+          <button type="button" class="btn-grid interactive w-full">
+            Transmit
+          </button>
+        </form>
+      </div>
+
+      <!-- Info & Map -->
+      <div class="flex flex-col gap-6">
+        <div class="hud-panel flex h-full flex-col justify-center p-8">
+          <h2 class="text-2xl">Headquarters</h2>
+          <ul class="mt-6 space-y-6 text-muted">
+            <li class="flex items-start gap-4">
+              <div class="mt-1 text-primary">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              </div>
+              <div>
+                <strong class="mb-1 block font-orbitron text-[color:var(--foreground)]">Guwahati Node</strong>
+                Assam, North East India<br>
+                Zip: 781001
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <div class="mt-1 text-primary">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              </div>
+              <div>
+                <strong class="mb-1 block font-orbitron text-[color:var(--foreground)]">Direct Line</strong>
+                <a href="mailto:hello@n8elabs.com" class="interactive transition-colors hover:text-primary">hello@n8elabs.com</a>
+              </div>
+            </li>
+          </ul>
+          
+          <div class="mt-10 border-t pt-8" style="border-color: var(--border);">
+            <h3 class="mb-4 font-orbitron font-bold">Join the Movement</h3>
+            <p class="mb-4 text-sm text-muted">If you are a developer from the NE region and want to work on high-impact products, we should connect.</p>
+            <a href="mailto:careers@n8elabs.com" class="interactive text-sm font-bold uppercase tracking-widest text-primary transition-colors hover:text-[color:var(--foreground)]">Submit Portfolio -></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

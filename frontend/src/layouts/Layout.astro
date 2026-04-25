@@ -1,0 +1,82 @@
+---
+import '../styles/global.css';
+import LoadingScreen from '../components/LoadingScreen.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="en" data-theme="tron">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>N8E Labs | The Next Generation of Tech is Here</title>
+
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script is:inline>
+      (() => {
+        try {
+          const savedTheme = localStorage.getItem("gridcn-theme") || "tron";
+          document.documentElement.setAttribute("data-theme", savedTheme);
+        } catch (error) {
+          document.documentElement.setAttribute("data-theme", "tron");
+        }
+      })();
+    </script>
+	</head>
+	<body class="antialiased">
+		<!-- Custom Cursor -->
+		<div id="custom-cursor" class="custom-cursor hidden md:block"></div>
+
+    <LoadingScreen />
+    
+    <div class="flex min-h-screen flex-col">
+      <Navbar />
+
+      <main class="flex-grow pt-24"> <!-- offset sticky navbar -->
+        <slot />
+      </main>
+
+      <Footer />
+    </div>
+
+		<script>
+      import gsap from 'gsap';
+
+			// Custom Cursor Logic
+			const cursor = document.getElementById('custom-cursor');
+			
+			if (cursor && window.matchMedia("(pointer: fine)").matches) {
+				cursor.classList.remove('hidden');
+
+				window.addEventListener('mousemove', (e) => {
+					gsap.to(cursor, {
+						x: e.clientX,
+						y: e.clientY,
+						duration: 0.1,
+						ease: "power2.out"
+					});
+				});
+
+				// Add hover effect for links and buttons
+				const addHoverListeners = () => {
+					const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, .interactive');
+					interactiveElements.forEach(el => {
+						el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+						el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+					});
+				};
+
+				addHoverListeners();
+
+				// In Astro page transitions, re-apply listeners
+				document.addEventListener('astro:page-load', addHoverListeners);
+			}
+		</script>
+	</body>
+</html>

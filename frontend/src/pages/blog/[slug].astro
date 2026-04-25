@@ -1,0 +1,80 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getPosts, getAssetURL } from '../../lib/directus';
+import { Image } from 'astro:assets';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<Layout>
+  <article class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-[1fr_18rem]">
+      <div class="hud-panel p-7 md:p-10">
+        <a href="/blog" class="interactive mb-6 inline-block font-mono text-[10px] uppercase tracking-[0.2em] text-primary transition-colors hover:text-[color:var(--foreground)]">
+          &larr; Back To Grid
+        </a>
+        <h1 class="text-3xl leading-tight md:text-5xl">{post.title}</h1>
+        <div class="mt-4 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
+          <span>By Admin</span>
+          <span>/</span>
+          <span>{post.date_published}</span>
+        </div>
+        {post.featured_image && (
+          <div class="relative mt-7 h-64 w-full overflow-hidden md:h-96">
+             <div class="absolute inset-0 z-10 bg-gradient-to-tr from-[color:var(--primary-soft)] to-transparent"></div>
+             <Image inferSize={true} src={getAssetURL(post.featured_image)} alt={post.title} class="h-full w-full object-cover opacity-80" />
+          </div>
+        )}
+        <div class="prose mt-8 max-w-none whitespace-pre-line text-base leading-relaxed text-muted">
+          {post.content}
+        </div>
+      </div>
+      <aside class="space-y-4">
+        <div class="hud-panel p-4">
+          <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">Table Of Contents</p>
+          <ul class="mt-3 space-y-2">
+            <li class="font-mono text-[11px] uppercase tracking-[0.16em] text-primary">Overview</li>
+            <li class="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">Core Takeaways</li>
+            <li class="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">Implementation Notes</li>
+          </ul>
+        </div>
+        <div class="hud-panel p-4">
+          <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">Metadata</p>
+          <div class="mt-3 space-y-2 text-sm text-muted">
+            <p>Status: Published</p>
+            <p>Source: N8E Labs</p>
+            <p>Format: Transmission</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .prose :where(p, li, blockquote) {
+    color: var(--muted);
+  }
+
+  .prose :where(h2, h3, h4) {
+    color: var(--foreground);
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 1.4rem;
+  }
+
+  .prose a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getPosts, getAssetURL } from '../../lib/directus';
+import { Image } from 'astro:assets';
+
+const posts = await getPosts();
+---
+
+<Layout>
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="hud-panel p-8">
+      <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary">Knowledge Base</p>
+      <h1 class="mt-3 text-4xl md:text-5xl">The Data Grid</h1>
+      <p class="mt-4 max-w-2xl text-base text-muted">
+        Transmissions about technology strategy, implementation playbooks, and execution stories from the field.
+      </p>
+    </div>
+
+    <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      {posts.map((post) => (
+        <a href={`/blog/${post.slug}`} class="interactive hud-panel block overflow-hidden transition-transform hover:-translate-y-1">
+          {post.featured_image && (
+            <div class="relative h-48 w-full overflow-hidden">
+               <Image inferSize={true} src={getAssetURL(post.featured_image)} alt={post.title} class="h-full w-full object-cover opacity-85" />
+               <div class="absolute inset-0 bg-black/30"></div>
+            </div>
+          )}
+          <div class="p-6">
+            <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">Transmission</p>
+            <h2 class="mt-2 text-xl leading-tight">{post.title}</h2>
+            <p class="mt-3 line-clamp-3 text-sm text-muted">{post.content}</p>
+            <p class="mt-5 font-mono text-[10px] uppercase tracking-[0.16em] text-muted">{post.date_published}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

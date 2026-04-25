@@ -1,0 +1,57 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getTeamMembers, getAssetURL } from "../lib/directus";
+import { Image } from "astro:assets";
+
+const teamMembers = await getTeamMembers();
+---
+
+<Layout>
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="hud-panel p-8 md:p-10">
+      <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary">About N8E Labs</p>
+      <h1 class="mt-3 text-4xl md:text-5xl">The Origin Story</h1>
+      <p class="mt-4 max-w-4xl text-base leading-relaxed text-muted">
+        N8E Labs was founded to decentralize access to world-class technology and create growth opportunities across North East India. We build practical systems that help teams modernize operations and adopt digital workflows confidently.
+      </p>
+      <p class="mt-3 max-w-4xl text-base leading-relaxed text-muted">
+        Our strategic focus spans product engineering, process automation, and business transformation. The mission remains simple: turn ambition into scalable systems.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 pb-20 sm:px-6 lg:px-8">
+    <div class="mb-8">
+      <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary">Team Roster</p>
+      <h2 class="mt-2 text-3xl md:text-4xl">Core Team</h2>
+    </div>
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      {
+        teamMembers.map((member, i) => (
+          <article class="hud-panel p-6" style={`animation-delay: ${i * 80}ms;`}>
+            <div class="flex flex-col items-center text-center">
+              <div class="mb-5 h-32 w-32 overflow-hidden rounded-full border-2 border-primary p-1 neon-box-shadow">
+                <Image
+                  class="h-full w-full rounded-full object-cover"
+                  src={
+                    member.image
+                      ? getAssetURL(member.image)
+                      : member.staticImage
+                        ? member.staticImage
+                        : "https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=300&h=300"
+                  }
+                  alt={`${member.name} - ${member.role}`}
+                  width={300}
+                  height={300}
+                />
+              </div>
+              <h3 class="text-2xl">{member.name}</h3>
+              <p class="mt-1 font-mono text-[10px] uppercase tracking-[0.2em] text-primary">{member.role}</p>
+              <p class="mt-3 text-sm text-muted">{member.bio}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</Layout>

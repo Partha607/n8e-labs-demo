@@ -1,0 +1,42 @@
+---
+---
+
+<div id="loading-screen" class="fixed inset-0 z-[10000] flex flex-col items-center justify-center transition-opacity duration-500" style="background: var(--background);">
+  <div class="relative w-32 h-32">
+    <!-- Spinning Circle -->
+    <div class="absolute inset-0 rounded-full border-t-4 animate-spin border-primary"></div>
+    <div class="absolute inset-2 rounded-full border-r-4 animate-spin" style="border-color: var(--accent); animation-direction: reverse; animation-duration: 1.5s;"></div>
+    <!-- Blinking Text / Logo placeholder -->
+    <div class="absolute inset-0 flex items-center justify-center">
+      <span class="font-orbitron text-primary font-bold tracking-widest text-lg animate-pulse">N8E</span>
+    </div>
+  </div>
+  <p class="font-space font-medium text-white/50 tracking-[0.2em] mt-8 uppercase text-sm" id="loading-text">
+    Initializing Protocol...
+  </p>
+</div>
+
+<script>
+  import gsap from 'gsap';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const loadingScreen = document.getElementById('loading-screen');
+    const loadingText = document.getElementById('loading-text');
+
+    if (loadingScreen && loadingText) {
+      // Simulate connecting sequence
+      setTimeout(() => { loadingText.innerText = "Connecting to Nodes..."; }, 500);
+      setTimeout(() => { loadingText.innerText = "System Online."; }, 1000);
+
+      // Fade out loading screen
+      gsap.to(loadingScreen, {
+        opacity: 0,
+        duration: 0.5,
+        delay: 1.5,
+        onComplete: () => {
+          loadingScreen.style.display = 'none';
+        }
+      });
+    }
+  });
+</script>

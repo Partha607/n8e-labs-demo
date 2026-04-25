@@ -1,0 +1,62 @@
+---
+const themes = [
+  { id: "tron", label: "Tron" },
+  { id: "ares", label: "Ares" },
+  { id: "clu", label: "Clu" },
+  { id: "athena", label: "Athena" },
+  { id: "aphrodite", label: "Aphrodite" },
+  { id: "poseidon", label: "Poseidon" },
+];
+---
+
+<div class="hud-panel p-2">
+  <p class="mb-2 font-mono text-[10px] uppercase tracking-[0.24em] text-muted">Theme Select</p>
+  <div class="flex flex-wrap gap-1.5">
+    {
+      themes.map((theme) => (
+        <button
+          type="button"
+          data-theme-option={theme.id}
+          class="theme-option rounded-sm border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] transition-colors"
+        >
+          {theme.label}
+        </button>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const THEME_KEY = "gridcn-theme";
+
+  const applyTheme = (theme) => {
+    document.documentElement.setAttribute("data-theme", theme);
+    const options = document.querySelectorAll(".theme-option");
+    options.forEach((button) => {
+      const target = button.getAttribute("data-theme-option");
+      const active = target === theme;
+      button.classList.toggle("border-primary", active);
+      button.classList.toggle("text-primary", active);
+      button.classList.toggle("neon-box-shadow", active);
+      if (!active) {
+        button.classList.remove("neon-box-shadow");
+      }
+    });
+  };
+
+  const initThemeSwitcher = () => {
+    const saved = localStorage.getItem(THEME_KEY) || "tron";
+    applyTheme(saved);
+    document.querySelectorAll(".theme-option").forEach((button) => {
+      button.addEventListener("click", () => {
+        const theme = button.getAttribute("data-theme-option");
+        if (!theme) return;
+        localStorage.setItem(THEME_KEY, theme);
+        applyTheme(theme);
+      });
+    });
+  };
+
+  document.addEventListener("astro:page-load", initThemeSwitcher);
+  initThemeSwitcher();
+</script>
