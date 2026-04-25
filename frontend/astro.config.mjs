@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import react from '@astrojs/react';
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -13,6 +14,7 @@ const site = isGithubActions && repoOwner ? `https://${repoOwner}.github.io` : u
 export default defineConfig({
   site,
   base,
+  integrations: [react()],
   vite: {
     plugins: [tailwindcss()]
   },

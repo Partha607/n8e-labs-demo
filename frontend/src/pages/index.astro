@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getPosts } from '../lib/directus';
+import { Tunnel } from '../components/thegridcn/Tunnel';
 
 const posts = await getPosts();
 const latestTransmissions = posts.slice(0, 3);
@@ -8,6 +9,7 @@ const latestTransmissions = posts.slice(0, 3);
 
 <Layout>
   <section class="relative overflow-hidden px-4 pb-20 pt-12 sm:px-6 lg:px-8">
+    <Tunnel client:only="react" className="pointer-events-none absolute inset-0 opacity-70" />
     <div class="pointer-events-none absolute inset-0 tron-grid"></div>
     <div class="pointer-events-none absolute inset-0 scanline-overlay opacity-35"></div>
     <div class="relative mx-auto max-w-7xl">
