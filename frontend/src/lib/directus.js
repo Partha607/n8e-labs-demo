@@ -2,6 +2,7 @@ import { createDirectus, rest, readItems, readSingleton } from '@directus/sdk';
 
 // Uses Astro's import.meta.env when available, otherwise fallbacks to localhost
 const directusUrl = import.meta?.env?.PUBLIC_DIRECTUS_URL || 'http://localhost:8055';
+const withBase = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
 
 export const directus = createDirectus(directusUrl).with(rest());
 
@@ -27,8 +28,8 @@ export async function getTeamMembers() {
     throw new Error("Empty Team");
   } catch (error) {
     return [
-      { name: "Partha", role: "Co-Founder & Director", bio: "Visionary architect behind the digital infrastructure connecting local systems to global grids.", staticImage: "/partha.png" },
-      { name: "Julius", role: "Co-Founder & Director", bio: "Visionary leader behind the strategy, business analytics, and operations of N8E Labs from Guwahati.", staticImage: "/julius.png" }
+      { name: "Partha", role: "Co-Founder & Director", bio: "Visionary architect behind the digital infrastructure connecting local systems to global grids.", staticImage: withBase('/partha.png') },
+      { name: "Julius", role: "Co-Founder & Director", bio: "Visionary leader behind the strategy, business analytics, and operations of N8E Labs from Guwahati.", staticImage: withBase('/julius.png') }
     ];
   }
 }

@@ -1,11 +1,13 @@
 ---
 import ThemeSwitcher from './ThemeSwitcher.astro';
+
+const withBase = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
 ---
 
 <nav class="fixed left-0 right-0 top-0 z-50 border-b bg-[color:var(--surface)]/90 backdrop-blur-md" style="border-color: var(--border);">
   <div class="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between gap-4">
-      <a href="/" class="interactive flex items-center gap-3 group">
+      <a href={withBase('/')} class="interactive flex items-center gap-3 group">
         <div class="flex h-8 w-8 items-center justify-center rounded-sm border border-primary bg-[color:var(--primary-soft)]">
           <span class="h-2 w-2 rounded-full bg-[color:var(--accent)]"></span>
         </div>
@@ -13,15 +15,15 @@ import ThemeSwitcher from './ThemeSwitcher.astro';
       </a>
 
       <div class="hidden items-center gap-5 md:flex">
-        <a href="/" class="interactive text-xs uppercase tracking-[0.16em] text-muted transition-colors hover:text-primary">Home</a>
-        <a href="/about" class="interactive text-xs uppercase tracking-[0.16em] text-muted transition-colors hover:text-primary">About</a>
-        <a href="/services" class="interactive text-xs uppercase tracking-[0.16em] text-muted transition-colors hover:text-primary">Services</a>
-        <a href="/blog" class="interactive text-xs uppercase tracking-[0.16em] text-muted transition-colors hover:text-primary">Blog</a>
-        <a href="/contact" class="interactive text-xs uppercase tracking-[0.16em] text-muted transition-colors hover:text-primary">Contact</a>
+        <a href={withBase('/')} class="interactive text-xs uppercase tracking-[0.16em] text-muted transition-colors hover:text-primary">Home</a>
+        <a href={withBase('/about')} class="interactive text-xs uppercase tracking-[0.16em] text-muted transition-colors hover:text-primary">About</a>
+        <a href={withBase('/services')} class="interactive text-xs uppercase tracking-[0.16em] text-muted transition-colors hover:text-primary">Services</a>
+        <a href={withBase('/blog')} class="interactive text-xs uppercase tracking-[0.16em] text-muted transition-colors hover:text-primary">Blog</a>
+        <a href={withBase('/contact')} class="interactive text-xs uppercase tracking-[0.16em] text-muted transition-colors hover:text-primary">Contact</a>
       </div>
 
       <div class="hidden md:block">
-        <a href="/contact" class="btn-grid interactive">Enter Grid</a>
+        <a href={withBase('/contact')} class="btn-grid interactive">Enter Grid</a>
       </div>
 
       <button id="mobile-nav-toggle" class="interactive rounded-sm border px-2 py-1 text-xs uppercase tracking-[0.14em] text-primary md:hidden" style="border-color: var(--border);" type="button">
@@ -34,11 +36,11 @@ import ThemeSwitcher from './ThemeSwitcher.astro';
     <div id="mobile-nav-panel" class="mt-3 hidden md:hidden">
       <div class="hud-panel p-3">
         <div class="mb-3 grid grid-cols-2 gap-2">
-          <a href="/" class="interactive text-[11px] uppercase tracking-[0.16em] text-muted">Home</a>
-          <a href="/about" class="interactive text-[11px] uppercase tracking-[0.16em] text-muted">About</a>
-          <a href="/services" class="interactive text-[11px] uppercase tracking-[0.16em] text-muted">Services</a>
-          <a href="/blog" class="interactive text-[11px] uppercase tracking-[0.16em] text-muted">Blog</a>
-          <a href="/contact" class="interactive text-[11px] uppercase tracking-[0.16em] text-muted">Contact</a>
+          <a href={withBase('/')} class="interactive text-[11px] uppercase tracking-[0.16em] text-muted">Home</a>
+          <a href={withBase('/about')} class="interactive text-[11px] uppercase tracking-[0.16em] text-muted">About</a>
+          <a href={withBase('/services')} class="interactive text-[11px] uppercase tracking-[0.16em] text-muted">Services</a>
+          <a href={withBase('/blog')} class="interactive text-[11px] uppercase tracking-[0.16em] text-muted">Blog</a>
+          <a href={withBase('/contact')} class="interactive text-[11px] uppercase tracking-[0.16em] text-muted">Contact</a>
         </div>
         <ThemeSwitcher />
       </div>

@@ -11,13 +11,13 @@ const themes = [
 
 <div class="hud-panel p-2">
   <p class="mb-2 font-mono text-[10px] uppercase tracking-[0.24em] text-muted">Theme Select</p>
-  <div class="flex flex-wrap gap-1.5">
+  <div class="grid grid-cols-2 gap-1.5 sm:grid-cols-3">
     {
       themes.map((theme) => (
         <button
           type="button"
           data-theme-option={theme.id}
-          class="theme-option rounded-sm border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] transition-colors"
+          class="theme-option w-full rounded-sm border px-2 py-1 text-center font-mono text-[10px] uppercase tracking-[0.16em] transition-colors"
         >
           {theme.label}
         </button>

@@ -5,6 +5,7 @@ import { Tunnel } from '../components/thegridcn/Tunnel';
 
 const posts = await getPosts();
 const latestTransmissions = posts.slice(0, 3);
+const withBase = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
 ---
 
 <Layout>
@@ -20,8 +21,8 @@ const latestTransmissions = posts.slice(0, 3);
           A GridCN-powered digital platform for N8E Labs. We engineer software, automation, and strategic digital systems for organizations across North East India.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href="/contact" class="btn-grid interactive">Enter The Lab</a>
-          <a href="/services" class="interactive rounded-sm border px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted transition-colors hover:text-primary" style="border-color: var(--border);">
+          <a href={withBase('/contact')} class="btn-grid interactive">Enter The Lab</a>
+          <a href={withBase('/services')} class="interactive rounded-sm border px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted transition-colors hover:text-primary" style="border-color: var(--border);">
             Explore Services
           </a>
         </div>
@@ -62,7 +63,7 @@ const latestTransmissions = posts.slice(0, 3);
           <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary">Blog Feed</p>
           <h2 class="mt-2 text-3xl md:text-4xl">Latest Transmissions</h2>
         </div>
-        <a href="/blog" class="interactive font-mono text-[10px] uppercase tracking-[0.2em] text-muted transition-colors hover:text-primary">View All</a>
+        <a href={withBase('/blog')} class="interactive font-mono text-[10px] uppercase tracking-[0.2em] text-muted transition-colors hover:text-primary">View All</a>
       </div>
       <div class="grid gap-4 md:grid-cols-3">
         {latestTransmissions.map((post) => (
@@ -77,6 +78,6 @@ const latestTransmissions = posts.slice(0, 3);
     </div>
   </section>
 
-  <script is:inline src="/mapdata.js"></script>
-  <script is:inline src="/countrymap.js"></script>
+  <script is:inline src={withBase('/mapdata.js')}></script>
+  <script is:inline src={withBase('/countrymap.js')}></script>
 </Layout>
