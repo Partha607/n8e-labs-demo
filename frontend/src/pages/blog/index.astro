@@ -4,6 +4,7 @@ import { getPosts, getAssetURL } from '../../lib/directus';
 import { Image } from 'astro:assets';
 
 const posts = await getPosts();
+const withBase = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
 ---
 
 <Layout>
@@ -18,7 +19,7 @@ const posts = await getPosts();
 
     <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
       {posts.map((post) => (
-        <a href={`/blog/${post.slug}`} class="interactive hud-panel block overflow-hidden transition-transform hover:-translate-y-1">
+        <a href={withBase(`/blog/${post.slug}`)} class="interactive hud-panel block overflow-hidden transition-transform hover:-translate-y-1">
           {post.featured_image && (
             <div class="relative h-48 w-full overflow-hidden">
                <Image inferSize={true} src={getAssetURL(post.featured_image)} alt={post.title} class="h-full w-full object-cover opacity-85" />
