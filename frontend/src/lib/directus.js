@@ -34,10 +34,10 @@ export async function getTeamMembers() {
       { name: "Benerjit", role: "External Scientific Advisor", bio: "", staticImage: withBase('/Benerjit.jpeg') },
       { name: "Shubham", role: "External Scientific Advisor", bio: "", staticImage: withBase('/shubham.jpg') },
       { name: "Siddhant", role: "Hardware and Software Engineer", bio: "", staticImage: withBase('/Siddhant.png') },
-      { name: "Prashant", role: "AI and Automation Engineer", bio: "", staticImage: withBase('/') },
+      { name: "Prashant", role: "AI and Automation Engineer", bio: "", staticImage: withBase('/prashant.jpeg') },
       { name: "Arnav", role: "Business and Sales Representative", bio: "", staticImage: withBase('/Arnav.jpeg') },
       { name: "Ankush", role: "Head of Operations in Manipur", bio: "", staticImage: withBase('/Ankush.jpeg') },
-      { name: "Amaan", role: "Head of Operations in Guwahati", bio: "", staticImage: withBase('/Amaan.jpeg') }
+      { name: "Amaan", role: "Head of Operations in Guwahati", bio: "", staticImage: withBase('/amaan.png') }
     ];
   }
 }
