@@ -28,8 +28,16 @@ export async function getTeamMembers() {
     throw new Error("Empty Team");
   } catch (error) {
     return [
-      { name: "Partha", role: "Co-Founder & Director", bio: "Visionary architect behind the digital infrastructure connecting local systems to global grids.", staticImage: withBase('/partha.png') },
-      { name: "Julius", role: "Co-Founder & Director", bio: "Visionary leader behind the strategy, business analytics, and operations of N8E Labs from Guwahati.", staticImage: withBase('/julius.png') }
+      { name: "Julius", role: "Co-Founder & CEO", bio: "Visionary leader behind the strategy, business analytics, and operations of N8E Labs from Guwahati.", staticImage: withBase('/julius.png') },
+      { name: "Partha", role: "Co-Founder & CTO", bio: "Visionary architect behind the digital infrastructure connecting local systems to global grids.", staticImage: withBase('/partha.png') },
+      { name: "Tridib", role: "External Technology Advisor", bio: "", staticImage: withBase('/Tridib.jpeg') },
+      { name: "Benerjit", role: "External Scientific Advisor", bio: "", staticImage: withBase('/Benerjit.jpeg') },
+      { name: "Shubham", role: "External Scientific Advisor", bio: "", staticImage: withBase('/shubham.jpg') },
+      { name: "Siddhant", role: "Hardware and Software Engineer", bio: "", staticImage: withBase('/Siddhant.png') },
+      { name: "Prashant", role: "AI and Automation Engineer", bio: "", staticImage: withBase('/') },
+      { name: "Arnav", role: "Business and Sales Representative", bio: "", staticImage: withBase('/Arnav.jpeg') },
+      { name: "Ankush", role: "Head of Operations in Manipur", bio: "", staticImage: withBase('/Ankush.jpeg') },
+      { name: "Amaan", role: "Head of Operations in Guwahati", bio: "", staticImage: withBase('/Amaan.jpeg') }
     ];
   }
 }
