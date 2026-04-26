@@ -10,6 +10,11 @@ const basePath = import.meta.env.BASE_URL === '/' ? '' : `/${import.meta.env.BAS
 const pathname = Astro.url.pathname;
 const pagePath = basePath && pathname.startsWith(basePath) ? pathname.slice(basePath.length) || '/' : pathname;
 const showMotionBackground = pagePath !== '/';
+const siteOrigin = Astro.site?.toString() ?? Astro.url.origin;
+const faviconSvg = new URL(withBase('/favicon.svg'), siteOrigin).toString();
+const canonicalUrl = new URL(pathname, siteOrigin).toString();
+const pageTitle = 'N8E Labs | The Next Generation of Tech is Here';
+const pageDescription = "We engineer software, automation, and strategic digital systems for organizations across North East India.";
 ---
 
 <!doctype html>
@@ -17,11 +22,23 @@ const showMotionBackground = pagePath !== '/';
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/png" href={withBase('/logo.png')} />
-		<link rel="shortcut icon" type="image/png" href={withBase('/logo.png')} />
-		<link rel="apple-touch-icon" href={withBase('/logo.png')} />
+		<link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+		<link rel="shortcut icon" href={withBase('/favicon.svg')} />
+		<link rel="apple-touch-icon" href={withBase('/favicon.svg')} />
 		<meta name="generator" content={Astro.generator} />
-		<title>N8E Labs | The Next Generation of Tech is Here</title>
+		<title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={faviconSvg} />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={faviconSvg} />
 
 		<!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
