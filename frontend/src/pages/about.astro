@@ -1,8 +1,28 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getTeamMembers, getAssetURL } from "../lib/directus";
+import { Divider } from "../components/thegridcn/divider";
 
 const teamMembers = await getTeamMembers();
+const groupedRoster = [
+  {
+    title: "Leadership Team",
+    members: ["Julius", "Partha"],
+  },
+  {
+    title: "Advisory Board",
+    members: ["Benerjit", "Tridib", "Shubham"],
+  },
+  {
+    title: "Engineering & Development",
+    members: ["Siddhant", "Prashant"],
+  },
+  {
+    title: "Operations & Growth",
+    members: ["Arnav", "Ankush", "Amaan"],
+  },
+];
+const findMember = (name) => teamMembers.find((member) => member.name?.toLowerCase() === name.toLowerCase());
 ---
 
 <Layout>
@@ -24,34 +44,47 @@ const teamMembers = await getTeamMembers();
       <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary">Team Roster</p>
       <h2 class="mt-2 text-3xl md:text-4xl">Core Team</h2>
     </div>
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-      {
-        teamMembers.map((member, i) => (
-          <article class="hud-panel p-6" style={`animation-delay: ${i * 80}ms;`}>
-            <div class="flex flex-col items-center text-center">
-              <div class="mb-5 h-32 w-32 overflow-hidden rounded-full border-2 border-primary p-1 neon-box-shadow">
-                <img
-                  class="h-full w-full rounded-full object-cover"
-                  src={
-                    member.image
-                      ? getAssetURL(member.image)
-                      : member.staticImage
-                        ? member.staticImage
-                        : "https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=300&h=300"
-                  }
-                  alt={`${member.name} - ${member.role}`}
-                  width="300"
-                  height="300"
-                  loading="lazy"
-                />
-              </div>
-              <h3 class="text-2xl">{member.name}</h3>
-              <p class="mt-1 font-mono text-[10px] uppercase tracking-[0.2em] text-primary">{member.role}</p>
-              <p class="mt-3 text-sm text-muted">{member.bio}</p>
+    <div class="space-y-8">
+      {groupedRoster.map((group) => {
+        const members = group.members.map(findMember).filter(Boolean);
+        return (
+          <div class="space-y-5">
+            <Divider label={group.title} variant="glow" />
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {members.map((member, i) => (
+                <div class={members.length % 2 === 1 && i === members.length - 1 ? "md:col-span-2 md:flex md:justify-center" : ""}>
+                  <article
+                    class={`hud-panel p-6 ${members.length % 2 === 1 && i === members.length - 1 ? "md:w-[calc(50%-0.75rem)]" : ""}`}
+                    style={`animation-delay: ${i * 80}ms;`}
+                  >
+                    <div class="flex flex-col items-center text-center">
+                      <div class="mb-5 h-32 w-32 overflow-hidden rounded-full border-2 border-primary p-1 neon-box-shadow">
+                        <img
+                          class="h-full w-full rounded-full object-cover"
+                          src={
+                            member.image
+                              ? getAssetURL(member.image)
+                              : member.staticImage
+                                ? member.staticImage
+                                : "https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=300&h=300"
+                          }
+                          alt={`${member.name} - ${member.role}`}
+                          width="300"
+                          height="300"
+                          loading="lazy"
+                        />
+                      </div>
+                      <h3 class="text-2xl">{member.name}</h3>
+                      <p class="mt-1 font-mono text-[10px] uppercase tracking-[0.2em] text-primary">{member.role}</p>
+                      <p class="mt-3 text-sm text-muted">{member.bio}</p>
+                    </div>
+                  </article>
+                </div>
+              ))}
             </div>
-          </article>
-        ))
-      }
+          </div>
+        );
+      })}
     </div>
   </section>
 </Layout>
