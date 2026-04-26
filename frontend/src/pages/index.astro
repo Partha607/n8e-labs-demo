@@ -5,7 +5,7 @@ import { Tunnel } from '../components/thegridcn/Tunnel';
 
 const posts = await getPosts();
 const latestTransmissions = posts.slice(0, 3);
-const withBase = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+const withBase = (path = '') => `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}${path.replace(/^\//, '')}`;
 ---
 
 <Layout>

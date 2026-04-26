@@ -2,7 +2,7 @@ import { createDirectus, rest, readItems, readSingleton } from '@directus/sdk';
 
 // Uses Astro's import.meta.env when available, otherwise fallbacks to localhost
 const directusUrl = import.meta?.env?.PUBLIC_DIRECTUS_URL || 'http://localhost:8055';
-const withBase = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+const withBase = (path = '') => `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}${path.replace(/^\//, '')}`;
 
 export const directus = createDirectus(directusUrl).with(rest());
 

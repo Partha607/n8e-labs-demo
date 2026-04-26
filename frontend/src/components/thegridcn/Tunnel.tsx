@@ -15,12 +15,12 @@ const ringGeometry = new THREE.TorusGeometry(3, 0.02, 6, 32);
 const speedLineGeometry = new THREE.BoxGeometry(0.02, 0.02, 1);
 
 function useThemeColor() {
-  const [color, setColor] = React.useState(themeColors.tron);
+  const [color, setColor] = React.useState(themeColors.ares);
 
   React.useEffect(() => {
     const getThemeColor = () => {
-      const theme = document.documentElement.getAttribute("data-theme") ?? "tron";
-      return themeColors[theme] ?? themeColors.tron;
+      const theme = document.documentElement.getAttribute("data-theme") ?? "ares";
+      return themeColors[theme] ?? themeColors.ares;
     };
 
     setColor(getThemeColor());

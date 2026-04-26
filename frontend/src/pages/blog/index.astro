@@ -4,7 +4,7 @@ import { getPosts, getAssetURL } from '../../lib/directus';
 import { Image } from 'astro:assets';
 
 const posts = await getPosts();
-const withBase = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+const withBase = (path = '') => `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}${path.replace(/^\//, '')}`;
 ---
 
 <Layout>
