@@ -4,14 +4,14 @@ import ThemeSwitcher from './ThemeSwitcher.astro';
 const withBase = (path = '') => `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}${path.replace(/^\//, '')}`;
 ---
 
-<nav class="fixed left-0 right-0 top-0 z-50 border-b bg-[color:var(--surface)]/90 backdrop-blur-md" style="border-color: var(--border);">
+<nav id="main-nav" class="fixed left-0 right-0 top-0 z-50 border-b bg-[color:var(--surface)]/90 backdrop-blur-md transition-transform duration-300 ease-in-out" style="border-color: var(--border);">
   <div class="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between gap-4">
       <a href={withBase('/')} class="interactive group shrink-0">
         <img
           src={withBase('/logo.png')}
           alt="N8E Labs"
-          class="h-auto w-[168px] object-contain transition-opacity group-hover:opacity-90 sm:w-[150px]"
+          class="h-12 w-12 object-contain transition-opacity group-hover:opacity-90 sm:h-14 sm:w-14"
           loading="eager"
           decoding="async"
         />
@@ -58,6 +58,59 @@ const withBase = (path = '') => `${import.meta.env.BASE_URL.replace(/\/?$/, '/')
       panel.classList.toggle("hidden");
     });
   };
-  document.addEventListener("astro:page-load", setupMobileNav);
+
+  const setupNavScroll = () => {
+    const nav = document.getElementById("main-nav");
+    if (!nav) return;
+
+    let lastScrollY = window.scrollY;
+    let hidden = false;
+
+    const update = () => {
+      const currentScrollY = window.scrollY;
+      const mobilePanel = document.getElementById("mobile-nav-panel");
+      const mobileOpen = mobilePanel && !mobilePanel.classList.contains("hidden");
+
+      if (mobileOpen || currentScrollY <= 0) {
+        if (hidden) {
+          nav.classList.remove("-translate-y-full");
+          hidden = false;
+        }
+      } else if (currentScrollY > lastScrollY && currentScrollY > 72) {
+        if (!hidden) {
+          nav.classList.add("-translate-y-full");
+          hidden = true;
+        }
+      } else if (currentScrollY < lastScrollY) {
+        if (hidden) {
+          nav.classList.remove("-translate-y-full");
+          hidden = false;
+        }
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    let ticking = false;
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            update();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+  };
+
+  document.addEventListener("astro:page-load", () => {
+    setupMobileNav();
+    setupNavScroll();
+  });
   setupMobileNav();
+  setupNavScroll();
 </script>
