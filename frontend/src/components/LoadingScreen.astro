@@ -1,5 +1,5 @@
 ---
-const withBase = (path = '') => `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}${path.replace(/^\//, '')}`;
+import { withAsset } from '../lib/assets.js';
 ---
 
 <div id="loading-screen" class="fixed inset-0 z-[10000] flex flex-col items-center justify-center transition-opacity duration-500" style="background: var(--background);">
@@ -10,7 +10,7 @@ const withBase = (path = '') => `${import.meta.env.BASE_URL.replace(/\/?$/, '/')
     <!-- Center logo -->
     <div class="absolute inset-0 flex items-center justify-center">
       <img
-        src={withBase('/logo.png')}
+        src={withAsset('/logo.png')}
         alt="N8E Labs"
         class="h-20 w-20 animate-pulse object-contain"
         loading="eager"

@@ -1,7 +1,6 @@
 ---
 import ThemeSwitcher from './ThemeSwitcher.astro';
-
-const withBase = (path = '') => `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}${path.replace(/^\//, '')}`;
+import { withBase, withAsset } from '../lib/assets.js';
 ---
 
 <nav id="main-nav" class="fixed left-0 right-0 top-0 z-50 border-b bg-[color:var(--surface)]/90 backdrop-blur-md transition-transform duration-300 ease-in-out" style="border-color: var(--border);">
@@ -9,7 +8,7 @@ const withBase = (path = '') => `${import.meta.env.BASE_URL.replace(/\/?$/, '/')
     <div class="flex items-center justify-between gap-4">
       <a href={withBase('/')} class="interactive group shrink-0">
         <img
-          src={withBase('/logo.png')}
+          src={withAsset('/logo.png')}
           alt="N8E Labs"
           class="h-12 w-12 object-contain transition-opacity group-hover:opacity-90 sm:h-14 sm:w-14"
           loading="eager"

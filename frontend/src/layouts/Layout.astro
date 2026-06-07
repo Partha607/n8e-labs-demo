@@ -4,14 +4,14 @@ import LoadingScreen from '../components/LoadingScreen.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import { Tunnel } from '../components/thegridcn/Tunnel';
+import { withBase, withAsset } from '../lib/assets.js';
 
-const withBase = (path = '') => `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}${path.replace(/^\//, '')}`;
 const basePath = import.meta.env.BASE_URL === '/' ? '' : `/${import.meta.env.BASE_URL.replace(/^\/|\/$/g, '')}`;
 const pathname = Astro.url.pathname;
 const pagePath = basePath && pathname.startsWith(basePath) ? pathname.slice(basePath.length) || '/' : pathname;
 const showMotionBackground = pagePath !== '/';
 const siteOrigin = Astro.site?.toString() ?? Astro.url.origin;
-const faviconSvg = new URL(withBase('/favicon.svg'), siteOrigin).toString();
+const faviconSvg = new URL(withAsset('/favicon.svg'), siteOrigin).toString();
 const canonicalUrl = new URL(pathname, siteOrigin).toString();
 const pageTitle = 'N8E Labs | The Next Generation of Tech is Here';
 const pageDescription = "We engineer software, automation, and strategic digital systems for organizations across North East India.";
@@ -22,9 +22,10 @@ const pageDescription = "We engineer software, automation, and strategic digital
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
-		<link rel="shortcut icon" href={withBase('/favicon.svg')} />
-		<link rel="apple-touch-icon" href={withBase('/favicon.svg')} />
+		<link rel="icon" href={withAsset('/favicon.ico')} sizes="any" />
+		<link rel="icon" type="image/svg+xml" href={withAsset('/favicon.svg')} />
+		<link rel="shortcut icon" href={withAsset('/favicon.ico')} />
+		<link rel="apple-touch-icon" href={withAsset('/logo.png')} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
