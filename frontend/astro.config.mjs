@@ -4,11 +4,9 @@ import react from '@astrojs/react';
 
 import tailwindcss from '@tailwindcss/vite';
 
-const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
-const repoOwner = process.env.GITHUB_REPOSITORY_OWNER;
-const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1];
-const base = isGithubActions && repoName ? `/${repoName}` : '/';
-const site = isGithubActions && repoOwner ? `https://${repoOwner}.github.io` : undefined;
+// Custom domains on GitHub Pages are served from the site root, not /repo-name/.
+const site = process.env.SITE_URL ?? 'https://n8elabs.com';
+const base = process.env.BASE_PATH ?? '/';
 
 // https://astro.build/config
 export default defineConfig({

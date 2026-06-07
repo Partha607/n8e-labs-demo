@@ -39,7 +39,8 @@ jobs:
 
       - name: Build site
         env:
-          GITHUB_ACTIONS: "true"
+          SITE_URL: https://n8elabs.com
+          BASE_PATH: /
         run: npm run build
 
       - name: Upload Pages artifact
