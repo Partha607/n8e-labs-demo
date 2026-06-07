@@ -11,10 +11,11 @@ const pathname = Astro.url.pathname;
 const pagePath = basePath && pathname.startsWith(basePath) ? pathname.slice(basePath.length) || '/' : pathname;
 const showMotionBackground = pagePath !== '/';
 const siteOrigin = Astro.site?.toString() ?? Astro.url.origin;
-const faviconSvg = new URL(withAsset('/favicon.svg'), siteOrigin).toString();
 const canonicalUrl = new URL(pathname, siteOrigin).toString();
 const pageTitle = 'N8E Labs | The Next Generation of Tech is Here';
 const pageDescription = "We engineer software, automation, and strategic digital systems for organizations across North East India.";
+const shareImage = new URL(withAsset('/logo.png'), siteOrigin).toString();
+const shareImageAlt = 'N8E Labs logo';
 ---
 
 <!doctype html>
@@ -31,15 +32,20 @@ const pageDescription = "We engineer software, automation, and strategic digital
     <meta name="description" content={pageDescription} />
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="N8E Labs" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
-    <meta property="og:image" content={faviconSvg} />
-    <meta property="og:image:type" content="image/svg+xml" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={shareImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="1024" />
+    <meta property="og:image:alt" content={shareImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
-    <meta name="twitter:image" content={faviconSvg} />
+    <meta name="twitter:image" content={shareImage} />
+    <meta name="twitter:image:alt" content={shareImageAlt} />
 
 		<!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
