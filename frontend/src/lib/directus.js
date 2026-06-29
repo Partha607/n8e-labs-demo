@@ -16,7 +16,7 @@ export async function getGlobalSettings() {
     return {
       seo_title: 'N8E Labs | Modern Tech Hub',
       seo_description: 'Pioneering the technological renaissance in North East India.',
-      contact_email: 'hello@n8elabs.com'
+      contact_email: 'contact@n8elabs.com'
     };
   }
 }

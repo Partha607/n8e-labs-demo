@@ -1,5 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const headquartersAddress =
+  '4th Floor, Megha Plaza, Basistha Chariali, Beltola Tiniali, Guwahati, Assam 781029, India';
+const headquartersPlusCode = '4Q7X+47 Guwahati, Assam, India';
+const mapQuery = encodeURIComponent(`${headquartersAddress} (${headquartersPlusCode})`);
+const mapEmbedUrl = `https://www.google.com/maps?q=${mapQuery}&output=embed&z=17`;
+const mapOpenUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
 ---
 
 <Layout>
@@ -46,8 +53,12 @@ import Layout from '../layouts/Layout.astro';
               </div>
               <div>
                 <strong class="mb-1 block font-orbitron text-[color:var(--foreground)]">Guwahati Node</strong>
-                Assam, North East India<br>
-                Zip: 781001
+                4th Floor, Megha Plaza, Basistha Chariali,<br />
+                Beltola Tiniali, Guwahati, Assam, India<br />
+                Zip: 781029<br />
+                <span class="mt-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-primary">
+                  Plus code: {headquartersPlusCode}
+                </span>
               </div>
             </li>
             <li class="flex items-start gap-4">
@@ -56,7 +67,7 @@ import Layout from '../layouts/Layout.astro';
               </div>
               <div>
                 <strong class="mb-1 block font-orbitron text-[color:var(--foreground)]">Direct Line</strong>
-                <a href="mailto:hello@n8elabs.com" class="interactive transition-colors hover:text-primary">hello@n8elabs.com</a>
+                <a href="mailto:contact@n8elabs.com" class="interactive transition-colors hover:text-primary">contact@n8elabs.com</a>
               </div>
             </li>
           </ul>
@@ -66,6 +77,28 @@ import Layout from '../layouts/Layout.astro';
             <p class="mb-4 text-sm text-muted">If you are a developer from the NE region and want to work on high-impact products, we should connect.</p>
             <a href="mailto:careers@n8elabs.com" class="interactive text-sm font-bold uppercase tracking-widest text-primary transition-colors hover:text-[color:var(--foreground)]">Submit Portfolio -></a>
           </div>
+        </div>
+
+        <div class="hud-panel overflow-hidden p-0">
+          <div class="flex items-center justify-between gap-3 border-b px-5 py-3" style="border-color: var(--border);">
+            <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">Sector Map</p>
+            <a
+              href={mapOpenUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="interactive font-mono text-[10px] uppercase tracking-[0.16em] text-muted transition-colors hover:text-primary"
+            >
+              Open in Google Maps
+            </a>
+          </div>
+          <iframe
+            title="N8E Labs headquarters — Megha Plaza, Guwahati"
+            src={mapEmbedUrl}
+            class="h-64 w-full border-0 md:h-80"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
         </div>
       </div>
     </div>
